@@ -47,7 +47,6 @@ def split_documents(documents: list[Document]):
 def add_to_faiss(chunks: list[Document]):
     chunks_with_ids = calculate_chunk_ids(chunks)
     if os.path.exists(os.path.join(FAISS_PATH, "index.faiss")):
-        print("Loading existing FAISS index")
         db = FAISS.load_local(FAISS_PATH, get_embedding_function())
         existing_ids = set([metadata["id"] for metadata in db.docstore._dict.values()])
         print(f"Number of existing documents in DB: {len(existing_ids)}")
